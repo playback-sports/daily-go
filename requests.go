@@ -49,9 +49,9 @@ type CreateMeetingTokenRequest struct {
 	Properties *MeetingToken `json:"properties,omitempty"`
 }
 
-// CreateMeetingTokenResponse contains newly-created meeting token properties.
+// CreateMeetingTokenResponse contains newly-created meeting token string.
 type CreateMeetingTokenResponse struct {
-	Token *MeetingToken `json:"token,omitempty"`
+	Token *string `json:"token,omitempty"`
 }
 
 // GetMeetingTokenResponse contains the meeting token properties directly (nil if invalid token)
