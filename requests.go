@@ -43,3 +43,16 @@ type UpdateRoomRequest struct {
 type UpdateRoomResponse struct {
 	Room
 }
+
+// CreateMeetingTokenRequest contains the properties for creating a meeting token.
+type CreateMeetingTokenRequest struct {
+	Properties *MeetingToken `json:"properties,omitempty"`
+}
+
+// CreateMeetingTokenResponse contains newly-created meeting token properties.
+type CreateMeetingTokenResponse struct {
+	Token *MeetingToken `json:"token,omitempty"`
+}
+
+// GetMeetingTokenResponse contains the meeting token properties directly (nil if invalid token)
+type GetMeetingTokenResponse MeetingToken

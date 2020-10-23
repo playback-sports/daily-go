@@ -56,6 +56,27 @@ type RoomConfig struct {
 	EjectAtRoomExpiry  *bool   `json:"eject_at_room_exp,omitempty"`
 	EjectAfterElapsed  *int32  `json:"eject_after_elapsed,omitempty"`
 	Lang               *string `json:"lang,omitempty"`
+	MeetingJoinHook    *string `json:"meeting_join_hook,omitempty"`
+	SignalingType      *string `json:"signaling_impl,omitempty"` // In JSON, they spell it 'signaling' so we use that
+}
+
+// MeetingToken is the configuration that controls room access and session configuration on a per-user basis.
+type MeetingToken struct {
+	NotBefore           *int64  `json:"nbf,omitempty"` // Unix timestamp in seconds
+	ExpiresAt           *int64  `json:"exp,omitempty"` // Unix timestamp in seconds
+	RoomName            *string `json:"room_name,omitempty"`
+	IsOwner             *bool   `json:"is_owner,omitempty"`
+	UserName            *string `json:"user_name,omitempty"`
+	UserID              *string `json:"user_id,omitempty"`
+	EnableScreenShare   *bool   `json:"enable_screenshare,omitempty"`
+	StartVideoOff       *bool   `json:"start_video_off,omitempty"`
+	StartAudioOff       *bool   `json:"start_audio_off,omitempty"`
+	EnableRecording     *bool   `json:"enable_recording,omitempty"`
+	StartCloudRecording *bool   `json:"start_cloud_recording,omitempty"`
+	CloseTabOnExit      *bool   `json:"close_tab_on_exit,omitempty"`
+	EjectAtRoomExpiry   *bool   `json:"eject_at_room_exp,omitempty"`
+	EjectAfterElapsed   *int32  `json:"eject_after_elapsed,omitempty"`
+	Lang                *string `json:"lang,omitempty"`
 }
 
 // String returns a pointer to the string.
