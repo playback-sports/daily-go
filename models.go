@@ -52,7 +52,7 @@ type RoomConfig struct {
 	EnableScreenShare  *bool   `json:"enable_screenshare,omitempty"`
 	EnableChat         *bool   `json:"enable_chat,omitempty"`
 	OwnerOnlyBroadcast *bool   `json:"owner_only_broadcast,omitempty"`
-	EnableRecording    *bool   `json:"enable_recording,omitempty"`
+	EnableRecording    *string `json:"enable_recording,omitempty"`
 	EjectAtRoomExpiry  *bool   `json:"eject_at_room_exp,omitempty"`
 	EjectAfterElapsed  *int32  `json:"eject_after_elapsed,omitempty"`
 	Lang               *string `json:"lang,omitempty"`
@@ -71,7 +71,7 @@ type MeetingToken struct {
 	EnableScreenShare   *bool   `json:"enable_screenshare,omitempty"`
 	StartVideoOff       *bool   `json:"start_video_off,omitempty"`
 	StartAudioOff       *bool   `json:"start_audio_off,omitempty"`
-	EnableRecording     *bool   `json:"enable_recording,omitempty"`
+	EnableRecording     *string `json:"enable_recording,omitempty"`
 	StartCloudRecording *bool   `json:"start_cloud_recording,omitempty"`
 	CloseTabOnExit      *bool   `json:"close_tab_on_exit,omitempty"`
 	EjectAtRoomExpiry   *bool   `json:"eject_at_room_exp,omitempty"`
