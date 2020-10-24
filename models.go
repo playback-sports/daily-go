@@ -47,7 +47,7 @@ type RoomConfig struct {
 	StartVideoOff      *bool   `json:"start_video_off,omitempty"`
 	StartAudioOff      *bool   `json:"start_audio_off,omitempty"`
 	MaxParticipants    *int32  `json:"max_participants,omitempty"`
-	AutoJoin           *bool   `json:"auto_join,omitempty"`
+	AutoJoin           *bool   `json:"autojoin,omitempty"`
 	EnableKnocking     *bool   `json:"enable_knocking,omitempty"`
 	EnableScreenShare  *bool   `json:"enable_screenshare,omitempty"`
 	EnableChat         *bool   `json:"enable_chat,omitempty"`
