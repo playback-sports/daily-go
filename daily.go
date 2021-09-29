@@ -102,6 +102,18 @@ func (c *Client) DeleteRoom(ctx context.Context, name string) error {
 	return c.request(ctx, "DELETE", "rooms/"+name, nil, &resp)
 }
 
+// CreateMeetingToken creates a meeting token.
+func (c *Client) CreateMeetingToken(ctx context.Context, req *CreateMeetingTokenRequest) (*CreateMeetingTokenResponse, error) {
+	resp := &CreateMeetingTokenResponse{}
+	return resp, c.request(ctx, "POST", "meeting-tokens", req, resp)
+}
+
+// GetMeetingToken validates and returns the properties of a meeting token.
+func (c *Client) GetMeetingToken(ctx context.Context, token string) (*GetMeetingTokenResponse, error) {
+	resp := &GetMeetingTokenResponse{}
+	return resp, c.request(ctx, "GET", "meeting-tokens/"+token, nil, resp)
+}
+
 func (c *Client) request(ctx context.Context, method, path string, data interface{}, result interface{}) error {
 	rel, err := url.Parse(path)
 	if err != nil {
