@@ -58,6 +58,7 @@ type RoomConfig struct {
 	Lang               *string `json:"lang,omitempty"`
 	MeetingJoinHook    *string `json:"meeting_join_hook,omitempty"`
 	SignalingType      *string `json:"signaling_impl,omitempty"` // In JSON, they spell it 'signaling' so we use that
+	SFUSwitchover      *int32  `json:"sfu_switchover,omitempty"`
 }
 
 // MeetingToken is the configuration that controls room access and session configuration on a per-user basis.
