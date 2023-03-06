@@ -114,6 +114,59 @@ func (c *Client) GetMeetingToken(ctx context.Context, token string) (*GetMeeting
 	return resp, c.request(ctx, "GET", "meeting-tokens/"+token, nil, resp)
 }
 
+type GetRecordingsParams struct {
+	Limit         int    `json:"limit"`
+	EndingBefore  string `json:"ending_before"`
+	StartingAfter string `json:"starting_after"`
+	RoomName      string `json:"room_name"`
+}
+
+func (c *Client) GetRecordings(ctx context.Context, p GetRecordingsParams) (*GetRecordingResponse, error) {
+	resp := &GetRecordingResponse{}
+	path := "/v1/recordings"
+	var params []string
+	if p.Limit > 0 {
+		params = append(params, fmt.Sprintf("limit=%d", p.Limit))
+	}
+	if p.EndingBefore != "" {
+		params = append(params, fmt.Sprintf("&ending_before=%s", p.EndingBefore))
+	}
+	if p.StartingAfter != "" {
+		params = append(params, fmt.Sprintf("&starting_after=%s", p.StartingAfter))
+	}
+	if p.RoomName != "" {
+		params = append(params, fmt.Sprintf("room_name=%s", p.RoomName))
+	}
+	return resp, c.request(ctx, "GET", generateUrlWithQueryParams(path, params), nil, resp)
+}
+
+// StartRecording starts a recording for a given room.
+func (c *Client) StartRecording(ctx context.Context, name string, req *StartRecordingRequest) (*StartRecordingResponse, error) {
+	resp := &StartRecordingResponse{}
+	return resp, c.request(ctx, "POST", "rooms/"+name+"/recordings/start", req, resp)
+}
+
+// StopRecording stops a recording for a given room.
+func (c *Client) StopRecording(ctx context.Context, name string) error {
+	resp := map[string]interface{}{}
+	return c.request(ctx, "POST", "rooms/"+name+"/recordings/stop", nil, &resp)
+}
+
+func (c *Client) GetRecordingLink(ctx context.Context, recordingID string) (*GetRecordingLinkResponse, error) {
+	resp := &GetRecordingLinkResponse{}
+	return resp, c.request(ctx, "GET", "recordings/"+recordingID+"/access-link", nil, resp)
+}
+
+func generateUrlWithQueryParams(path string, params []string) string {
+	if len(params) > 0 {
+		path = path + "?" + params[0]
+		for _, param := range params[1:] {
+			path = path + "&" + param
+		}
+	}
+	return path
+}
+
 func (c *Client) request(ctx context.Context, method, path string, data interface{}, result interface{}) error {
 	rel, err := url.Parse(path)
 	if err != nil {
