@@ -40,44 +40,62 @@ const (
 	Org     RoomPrivacy = "org"
 )
 
+type PermissionType string
+
+const (
+	Video       PermissionType = "video"
+	Audio       PermissionType = "audio"
+	ScreenAudio PermissionType = "screenAudio"
+	ScreenVideo PermissionType = "screenVideo"
+)
+
+type Permissions struct {
+	CanSend     *[]PermissionType `json:"canSend,omitempty"`
+	HasPresence *bool             `json:"hasPresence,omitempty"`
+}
+
 // RoomConfig is the configuration for a room.
 type RoomConfig struct {
-	NotBefore          *int64  `json:"nbf,omitempty"` // Unix timestamp in seconds
-	ExpiresAt          *int64  `json:"exp,omitempty"` // Unix timestamp in seconds
-	StartVideoOff      *bool   `json:"start_video_off,omitempty"`
-	StartAudioOff      *bool   `json:"start_audio_off,omitempty"`
-	MaxParticipants    *int32  `json:"max_participants,omitempty"`
-	AutoJoin           *bool   `json:"autojoin,omitempty"`
-	EnableKnocking     *bool   `json:"enable_knocking,omitempty"`
-	EnableScreenShare  *bool   `json:"enable_screenshare,omitempty"`
-	EnableChat         *bool   `json:"enable_chat,omitempty"`
-	OwnerOnlyBroadcast *bool   `json:"owner_only_broadcast,omitempty"`
-	EnableRecording    *string `json:"enable_recording,omitempty"`
-	EjectAtRoomExpiry  *bool   `json:"eject_at_room_exp,omitempty"`
-	EjectAfterElapsed  *int32  `json:"eject_after_elapsed,omitempty"`
-	Lang               *string `json:"lang,omitempty"`
-	MeetingJoinHook    *string `json:"meeting_join_hook,omitempty"`
-	SignalingType      *string `json:"signaling_impl,omitempty"` // In JSON, they spell it 'signaling' so we use that
-	SFUSwitchover      *int32  `json:"sfu_switchover,omitempty"`
+	NotBefore                *int64  `json:"nbf,omitempty"` // Unix timestamp in seconds
+	ExpiresAt                *int64  `json:"exp,omitempty"` // Unix timestamp in seconds
+	StartVideoOff            *bool   `json:"start_video_off,omitempty"`
+	StartAudioOff            *bool   `json:"start_audio_off,omitempty"`
+	MaxParticipants          *int32  `json:"max_participants,omitempty"`
+	AutoJoin                 *bool   `json:"autojoin,omitempty"`
+	EnableKnocking           *bool   `json:"enable_knocking,omitempty"`
+	EnableScreenShare        *bool   `json:"enable_screenshare,omitempty"`
+	EnableChat               *bool   `json:"enable_chat,omitempty"`
+	OwnerOnlyBroadcast       *bool   `json:"owner_only_broadcast,omitempty"`
+	EnableRecording          *string `json:"enable_recording,omitempty"`
+	EjectAtRoomExpiry        *bool   `json:"eject_at_room_exp,omitempty"`
+	EjectAfterElapsed        *int32  `json:"eject_after_elapsed,omitempty"`
+	Lang                     *string `json:"lang,omitempty"`
+	MeetingJoinHook          *string `json:"meeting_join_hook,omitempty"`
+	SignalingType            *string `json:"signaling_impl,omitempty"` // In JSON, they spell it 'signaling' so we use that
+	SFUSwitchover            *int32  `json:"sfu_switchover,omitempty"`
+	EnableMeshSFU            *bool   `json:"enable_mesh_sfu,omitempty"`
+	EnableTerseLogging       *bool   `json:"enable_terse_logging,omitempty"`
+	EnableHiddenParticipants *bool   `json:"enable_hidden_participants,omitempty"`
 }
 
 // MeetingToken is the configuration that controls room access and session configuration on a per-user basis.
 type MeetingToken struct {
-	NotBefore           *int64  `json:"nbf,omitempty"` // Unix timestamp in seconds
-	ExpiresAt           *int64  `json:"exp,omitempty"` // Unix timestamp in seconds
-	RoomName            *string `json:"room_name,omitempty"`
-	IsOwner             *bool   `json:"is_owner,omitempty"`
-	UserName            *string `json:"user_name,omitempty"`
-	UserID              *string `json:"user_id,omitempty"`
-	EnableScreenShare   *bool   `json:"enable_screenshare,omitempty"`
-	StartVideoOff       *bool   `json:"start_video_off,omitempty"`
-	StartAudioOff       *bool   `json:"start_audio_off,omitempty"`
-	EnableRecording     *string `json:"enable_recording,omitempty"`
-	StartCloudRecording *bool   `json:"start_cloud_recording,omitempty"`
-	CloseTabOnExit      *bool   `json:"close_tab_on_exit,omitempty"`
-	EjectAtRoomExpiry   *bool   `json:"eject_at_room_exp,omitempty"`
-	EjectAfterElapsed   *int32  `json:"eject_after_elapsed,omitempty"`
-	Lang                *string `json:"lang,omitempty"`
+	NotBefore           *int64       `json:"nbf,omitempty"` // Unix timestamp in seconds
+	ExpiresAt           *int64       `json:"exp,omitempty"` // Unix timestamp in seconds
+	RoomName            *string      `json:"room_name,omitempty"`
+	IsOwner             *bool        `json:"is_owner,omitempty"`
+	UserName            *string      `json:"user_name,omitempty"`
+	UserID              *string      `json:"user_id,omitempty"`
+	EnableScreenShare   *bool        `json:"enable_screenshare,omitempty"`
+	StartVideoOff       *bool        `json:"start_video_off,omitempty"`
+	StartAudioOff       *bool        `json:"start_audio_off,omitempty"`
+	EnableRecording     *string      `json:"enable_recording,omitempty"`
+	StartCloudRecording *bool        `json:"start_cloud_recording,omitempty"`
+	CloseTabOnExit      *bool        `json:"close_tab_on_exit,omitempty"`
+	EjectAtRoomExpiry   *bool        `json:"eject_at_room_exp,omitempty"`
+	EjectAfterElapsed   *int32       `json:"eject_after_elapsed,omitempty"`
+	Lang                *string      `json:"lang,omitempty"`
+	Permissions         *Permissions `json:"permissions,omitempty"`
 }
 
 // String returns a pointer to the string.
