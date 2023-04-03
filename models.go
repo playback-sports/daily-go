@@ -98,6 +98,22 @@ type MeetingToken struct {
 	Permissions         *Permissions `json:"permissions,omitempty"`
 }
 
+// Layout is a configuration for started a recording
+type Layout struct {
+	Preset string `json:"preset"`
+}
+
+type Recording struct {
+	Id              string        `json:"id"`
+	StartTs         int           `json:"start_ts"`
+	Status          string        `json:"status"`
+	MaxParticipants int           `json:"max_participants"`
+	RoomName        string        `json:"room_name"`
+	Tracks          []interface{} `json:"tracks"`
+	Duration        int           `json:"duration"`
+	ShareToken      string        `json:"share_token"`
+}
+
 // String returns a pointer to the string.
 func String(s string) *string {
 	return &s

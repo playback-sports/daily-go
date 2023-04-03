@@ -56,3 +56,24 @@ type CreateMeetingTokenResponse struct {
 
 // GetMeetingTokenResponse contains the meeting token properties directly (nil if invalid token)
 type GetMeetingTokenResponse MeetingToken
+
+type GetRecordingResponse struct {
+	TotalCount int         `json:"total_count"`
+	Recording  []Recording `json:"data"`
+}
+
+type GetRecordingLinkResponse struct {
+	DownloadLink string `json:"download_link"`
+	Expires      int    `json:"expires"`
+}
+
+type StartRecordingRequest struct {
+	Height int    `json:"height"`
+	Width  int    `json:"width"`
+	Layout Layout `json:"layout"`
+}
+
+type StartRecordingResponse struct {
+	Sent        bool   `json:"sent"`
+	RecordingID string `json:"recordingId"`
+}
