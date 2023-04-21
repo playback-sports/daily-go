@@ -152,6 +152,12 @@ func (c *Client) StopRecording(ctx context.Context, name string) error {
 	return c.request(ctx, "POST", "rooms/"+name+"/recordings/stop", nil, &resp)
 }
 
+// DeleteRecording deletes a recording on Daily's side
+func (c *Client) DeleteRecording(ctx context.Context, recordingID string) error {
+	resp := map[string]interface{}{}
+	return c.request(ctx, "DELETE", "recordings/"+recordingID, nil, resp)
+}
+
 func (c *Client) GetRecordingLink(ctx context.Context, recordingID string) (*GetRecordingLinkResponse, error) {
 	resp := &GetRecordingLinkResponse{}
 	return resp, c.request(ctx, "GET", "recordings/"+recordingID+"/access-link", nil, resp)
